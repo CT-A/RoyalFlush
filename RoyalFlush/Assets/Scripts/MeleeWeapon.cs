@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MeleeWeapon : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class MeleeWeapon : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(player.gameObject.transform.position * Time.fixedDeltaTime * followSpeed);
+        float angle = Vector2.Angle(Vector2.right, player.movement);
+        if (player.movement.y < 0) angle = angle * -1;
+        rb.MovePosition(player.gameObject.transform.position * Time.fixedDeltaTime * followSpeed *10);
+        rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime*5f));
     }
 }

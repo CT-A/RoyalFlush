@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerControlls : MonoBehaviour
 {
     public float moveSpeed;
+    public Vector2 movement;
 
     private Rigidbody2D rb;
-    private Vector2 movement;
 
     public bool isMelee;
 
