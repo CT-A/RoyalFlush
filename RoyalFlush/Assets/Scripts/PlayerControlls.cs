@@ -23,7 +23,6 @@ public class PlayerControlls : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
-        Debug.Log(movement.x);
     }
 
     void FixedUpdate()
