@@ -35,6 +35,9 @@ public class MeleeWeapon : MonoBehaviour
         float angle = Vector2.Angle(Vector2.right, player.movement);
         if (player.movement.y < 0) angle = angle * -1;
         rb.MovePosition(player.gameObject.transform.position * Time.fixedDeltaTime * followSpeed *10);
-        rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime*5f));
+        if (player.movement.x != 0 || player.movement.y != 0)
+        {
+            rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * 5f));
+        }
     }
 }
