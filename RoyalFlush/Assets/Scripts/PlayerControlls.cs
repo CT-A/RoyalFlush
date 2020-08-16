@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerControlls : MonoBehaviour
 {
     public float moveSpeed;
+    public Vector2 movement;
 
     private Rigidbody2D rb;
-    private Vector2 movement;
 
     public bool isMelee;
 
@@ -23,6 +23,11 @@ public class PlayerControlls : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
+
+        if (Input.GetMouseButton(0))
+        {
+            
+        }
     }
 
     void FixedUpdate()
