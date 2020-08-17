@@ -26,6 +26,7 @@ public class Sword : Weapon
         rotateSpeed = 5f;
         swingSpeed = 20f;
         player.weapon = this;
+        isAttacking = false;
     }
 
     // Update is called once per frame
@@ -41,7 +42,6 @@ public class Sword : Weapon
         float angle = Vector2.Angle(Vector2.right, player.mousePos);
         if (player.mousePos.y < 0) angle = angle * -1;
         angle += 180;
-        isAttacking = true;
         rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
     }
 
