@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MeleeWeapon : Weapon
+public class Sword : Weapon
 {
     public PlayerControlls player;
 
@@ -36,29 +36,25 @@ public class MeleeWeapon : Weapon
 
     void FixedUpdate()
     {
-        rb.MovePosition(player.gameObject.transform.position * Time.fixedDeltaTime * followSpeed * 10);
+        if (!isAttacking) rb.MovePosition(player.gameObject.transform.position * Time.fixedDeltaTime * followSpeed * 10);
 
-        float angle = Vector2.Angle(Vector2.right, player.movement);
-        if (player.movement.y < 0) angle = angle * -1;
-        if (player.movement.x != 0 || player.movement.y != 0)
-        {
-            if(!isAttacking) rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * rotateSpeed));
-        }
+        float angle = Vector2.Angle(Vector2.right, player.mousePos);
+        if (player.mousePos.y < 0) angle = angle * -1;
+        angle += 180;
+        isAttacking = true;
+        rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
     }
 
     public override void Attack(Vector2 mousePos)
     {
-        float angle = Vector2.Angle(Vector2.right, mousePos);
-        if (mousePos.y < 0) angle = angle * -1;
-        angle += 180;
         isAttacking = true;
-        rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
+        rb.MovePosition((player.gameObject.transform.position + new Vector3(mousePos.x,mousePos.y,0)*10) * Time.fixedDeltaTime );
         StartCoroutine(attackAnim());
     }
 
     IEnumerator attackAnim()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         isAttacking = false;
     }
 }
