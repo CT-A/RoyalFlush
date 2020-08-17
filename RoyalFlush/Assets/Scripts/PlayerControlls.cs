@@ -20,8 +20,8 @@ public class PlayerControlls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 5f;
-
-        weapon.InstantiateWeapon(this);
+        if (weapon != null)
+            weapon.InstantiateWeapon(this);
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class PlayerControlls : MonoBehaviour
         movement.y = Input.GetAxis("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && (weapon != null))
         {
             weapon.Attack(mousePos);
         }
