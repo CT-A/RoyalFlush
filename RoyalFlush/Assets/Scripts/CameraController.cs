@@ -5,10 +5,15 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
+    Vector3 playerPos;
+    Vector3 camPos;
+    public float offset;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 camPos = player.transform.position;
+        playerPos = player.transform.position;
+        camPos = playerPos;
         camPos.z = transform.position.z;
         transform.position = camPos;
     }
@@ -16,7 +21,25 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 camPos = player.transform.position;
+        playerPos = player.transform.position;
+        camPos = Vector3.Lerp(camPos, playerPos, speed * Time.deltaTime);
+        if (playerPos.x > (camPos.x + offset))
+        {
+            camPos.x = playerPos.x - offset;
+        }
+        if (playerPos.x < (camPos.x - offset))
+        {
+            camPos.x = playerPos.x + offset;
+
+        }
+        if (playerPos.y > (camPos.y + offset))
+        {
+            camPos.y = playerPos.y - offset;
+        }
+        if (playerPos.y < (camPos.y - offset))
+        {
+            camPos.y = playerPos.y + offset;
+        }
         camPos.z = transform.position.z;
         transform.position = camPos;
     }
