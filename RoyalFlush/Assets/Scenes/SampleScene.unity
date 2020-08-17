@@ -13250,7 +13250,7 @@ GameObject:
   - component: {fileID: 1105313334}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13270,6 +13270,8 @@ MonoBehaviour:
   moveSpeed: 10
   movement: {x: 0, y: 0}
   isMelee: 0
+  weapon: {fileID: 0}
+  mousePos: {x: 0, y: 0}
 --- !u!50 &1105313331
 Rigidbody2D:
   serializedVersion: 4
@@ -13437,6 +13439,8 @@ GameObject:
   - component: {fileID: 1476947843}
   - component: {fileID: 1476947842}
   - component: {fileID: 1476947844}
+  - component: {fileID: 1476947845}
+  - component: {fileID: 1476947846}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -13535,3 +13539,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &1476947845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476947841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a005197ab7fa3244b9eb076f7a240e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 978129960}
+  drawPath: 1
+--- !u!114 &1476947846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476947841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b5e74b040d783478790336881299cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1105313329}
+  pf: {fileID: 0}
+  speed: 3
+  moving: 0
