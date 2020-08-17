@@ -11,11 +11,17 @@ public class PlayerControlls : MonoBehaviour
 
     public bool isMelee;
 
+    public Weapon weapon = null;
+
+    public Vector2 mousePos;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 5f;
+
+        weapon.InstantiateWeapon(this);
     }
 
     // Update is called once per frame
@@ -23,10 +29,11 @@ public class PlayerControlls : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButton(0))
         {
-            
+            weapon.Attack(mousePos);
         }
     }
 
