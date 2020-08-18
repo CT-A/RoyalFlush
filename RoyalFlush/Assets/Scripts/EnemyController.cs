@@ -11,18 +11,34 @@ public class EnemyController : MonoBehaviour
     private bool moving;
     public float atkCD;
     private float atkTime;
+    private float attackRange;
+    private Rigidbody2D rb;
+    private float lungeSpeed;
+    public float lungeTimer;
+    private float lungeTime;
+    private float accuracy;
+    private Vector3 targetPos;
+    private bool attacking;
     // Start is called before the first frame update
     void Start()
     {
-        atkTime = 1;
+        rb = GetComponent<Rigidbody2D>();
+        attackRange = 2f;
+        atkTime = .8f;
         speed = 2.5f;
+        lungeSpeed = 10;
+        lungeTimer = 0;
+        lungeTime = 1;
+        attacking = false;
+        //accuracy is how close to lunging we keep adjusting targeting, closer to 0 is better
+        accuracy = .1f;
         moving = true;
         pf = GetComponent<AStarPathfinding>();
         player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //try to attack
         attack();
@@ -33,31 +49,51 @@ public class EnemyController : MonoBehaviour
 
     void move()
     {
-        float step = speed * Time.deltaTime;
         //new position is closer to the first step on the rout to the player
-        transform.position = Vector3.MoveTowards(transform.position,pf.WorldPointFromNode(pf.FindPath(transform.position,player.transform.position)[0]),step);
+        //so find this step
+        Vector3 stepOne = pf.WorldPointFromNode(pf.FindPath(transform.position, player.transform.position)[0]);
+        stepOne.z = 0;
+        //dir to target
+        Vector3 towardsPlayer = (stepOne - transform.position).normalized;
+        rb.velocity = (towardsPlayer*speed);
     }
 
     void attack() {
         //if not attacking and next to player, start
-        if ((pf.FindPath(transform.position, player.transform.position).Count == 0) && atkCD <= 0) {
+        if (((transform.position - player.transform.position).magnitude <= attackRange) && atkCD <= 0) {
             atkCD = atkTime;
             //stop moving
+            //if (pf.FindPath(transform.position, player.transform.position).Count == 0)
             moving = false;
             //start attack display
             GetComponent<SpriteRenderer>().color = Color.red;
+            attacking = true;
         }
 
-        //decrement timer
+        //decrement timers
         atkCD -= Time.deltaTime;
+        lungeTimer -= Time.deltaTime;
 
-        //if done attacking, finish
-        if (atkCD <= 0)
+        //if not locked on, target
+        //accuracy is how close to lunging we keep adjusting targeting
+        if (atkCD >= accuracy)
+            targetPos = player.transform.position;
+
+        //if done charging, finish attacking
+        if (atkCD <= 0 && lungeTimer <= 0)
         {
+            //If params are right
+            if (/*(transform.position - player.transform.position).magnitude <= attackRange*/attacking) {
+                Vector3 towardsTarget = (targetPos - transform.position).normalized;
+                rb.velocity = (towardsTarget * lungeSpeed);
+                lungeTimer = lungeTime;
+                attacking = false;
+            }
+
             //stop attack display
             GetComponent<SpriteRenderer>().color = Color.white;
             //start moving if far enough
-            if (pf.FindPath(transform.position, player.transform.position).Count > 0) moving = true;
+            if ((pf.FindPath(transform.position, player.transform.position).Count > 0) && lungeTimer <= 0) moving = true;
         }
 
     }
