@@ -21,7 +21,10 @@ public class PlayerControlls : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 5f;
         if (weapon != null)
+        {
             weapon.InstantiateWeapon(this);
+            weapon = GameObject.FindWithTag("Weapon").GetComponent<Weapon>();
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class PlayerControlls : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         if (Input.GetMouseButton(0) && (weapon != null))
         {
