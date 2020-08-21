@@ -23,12 +23,12 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        attackRange = 2f;
+        attackRange = 3f;
         atkTime = .8f;
         speed = 2.5f;
         lungeSpeed = 10;
         lungeTimer = 0;
-        lungeTime = 1;
+        lungeTime = .6f;
         attacking = false;
         //accuracy is how close to lunging we keep adjusting targeting, closer to 0 is better
         accuracy = .1f;
@@ -65,6 +65,7 @@ public class EnemyController : MonoBehaviour
             //stop moving
             //if (pf.FindPath(transform.position, player.transform.position).Count == 0)
             moving = false;
+
             //start attack display
             GetComponent<SpriteRenderer>().color = Color.red;
             attacking = true;
@@ -87,6 +88,7 @@ public class EnemyController : MonoBehaviour
                 Vector3 towardsTarget = (targetPos - transform.position).normalized;
                 rb.velocity = (towardsTarget * lungeSpeed);
                 lungeTimer = lungeTime;
+                atkCD = atkTime;
                 attacking = false;
             }
 

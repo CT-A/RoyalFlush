@@ -41,4 +41,9 @@ public class PlayerControlls : MonoBehaviour
     {
         rb.MovePosition(rb.position + moveSpeed * movement * Time.fixedDeltaTime);
     }
+
+    public void LoadFromSave(PlayerData data)
+    {
+        gameObject.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+    }
 }
