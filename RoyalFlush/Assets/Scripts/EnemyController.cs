@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     private float accuracy;
     private Vector3 targetPos;
     private bool attacking;
+    public float hp;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,9 @@ public class EnemyController : MonoBehaviour
         moving = true;
         pf = GetComponent<AStarPathfinding>();
         player = GameObject.FindWithTag("Player");
+
+        //remember to change this
+        hp = 100;
     }
 
     // Update is called once per frame

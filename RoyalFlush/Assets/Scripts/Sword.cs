@@ -11,11 +11,14 @@ public class Sword : Weapon
 
     public float offsetDistance;
     public int damage;
-    public int attackSpeed;
+    public float attackSpeed;
     public float swingSpeed;
     public float followSpeed;
     public float rotateSpeed;
     public bool isAttacking;
+    public float baseOffset;
+    public float t;
+    public float range;
 
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
@@ -28,7 +31,14 @@ public class Sword : Weapon
         swingSpeed = 20f;
         player.weapon = this;
         isAttacking = false;
-        offsetDistance = 1;
+        range = 2;
+        baseOffset = .5f;
+        offsetDistance = baseOffset;
+        dpt = 1;
+        tickRate = 10;
+        tickTimer = 0;
+        attackSpeed = .5f;
+        t = 0;
     }
 
     // Update is called once per frame
@@ -39,13 +49,19 @@ public class Sword : Weapon
 
     void FixedUpdate()
     {
+        tickTimer = (tickTimer - 1);
+        if (tickTimer < 0) tickTimer = tickRate;
         if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (player == null) player = GameObject.FindWithTag("Player").GetComponent<PlayerControlls>();
         float angle = Vector2.Angle(Vector2.right, player.mousePos);
         if (player.mousePos.y < 0) angle = angle * -1;
         angle += 180;
         //Debug.Log("rb is " + rb);
         rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
 
+        if (!isAttacking && t > 0) t -= (Time.fixedDeltaTime / attackSpeed) * 8;
+        if (t < 0) t = 0;
+        offsetDistance = Mathf.Lerp(baseOffset, range, t);
         Vector3 offsetVec = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
         //offsetVec = Quaternion.Euler(0, 0, angle) * offsetVec;
         rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
@@ -54,16 +70,18 @@ public class Sword : Weapon
     public override void Attack(Vector2 mousePos)
     {
         isAttacking = true;
-        offsetDistance = 2;
+        t += (Time.fixedDeltaTime/attackSpeed)*4;
+        if (t > 1) t = 1;
         //rb.MovePosition((player.gameObject.transform.position + new Vector3(mousePos.x,mousePos.y,0).normalized*10) * Time.fixedDeltaTime );
-        
+
         StartCoroutine(attackAnim());
     }
 
+
+
     IEnumerator attackAnim()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(attackSpeed);
         isAttacking = false;
-        offsetDistance = 1;
     }
 }
