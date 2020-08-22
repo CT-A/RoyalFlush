@@ -44,11 +44,17 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (hp < 0) die();
         //try to attack
         attack();
 
         //if you're moving, move
         if (moving) move();
+    }
+
+    void die()
+    {
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().drop(gameObject.transform.position);
     }
 
     void move()

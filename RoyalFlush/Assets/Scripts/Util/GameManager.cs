@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private PlayerControlls pc;
+    public DropHandler dh;
     private bool saveOnLoad;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,11 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine("waitForSceneLoad", sceneNumber);
         }
+    }
+
+    public void drop(Vector3 pos)
+    {
+        dh.drop(pos);
     }
 
     IEnumerator waitForSceneLoad(int sceneNumber)
