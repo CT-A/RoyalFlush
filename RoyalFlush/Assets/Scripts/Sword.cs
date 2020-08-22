@@ -19,6 +19,7 @@ public class Sword : Weapon
     public float baseOffset;
     public float t;
     public float range;
+    public Vector3 attackOffset;
 
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
@@ -56,15 +57,16 @@ public class Sword : Weapon
         float angle = Vector2.Angle(Vector2.right, player.mousePos);
         if (player.mousePos.y < 0) angle = angle * -1;
         angle += 180;
-        //Debug.Log("rb is " + rb);
-        rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
+
+        if (!isAttacking)  rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
 
         if (!isAttacking && t > 0) t -= (Time.fixedDeltaTime / attackSpeed) * 8;
         if (t < 0) t = 0;
         offsetDistance = Mathf.Lerp(baseOffset, range, t);
         Vector3 offsetVec = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
-        //offsetVec = Quaternion.Euler(0, 0, angle) * offsetVec;
-        rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
+
+        if (isAttacking) rb.MovePosition((player.gameObject.transform.position + attackOffset) * Time.fixedDeltaTime * followSpeed * 10);
+        else rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
     }
 
     public override void Attack(Vector2 mousePos)
@@ -72,7 +74,8 @@ public class Sword : Weapon
         isAttacking = true;
         t += (Time.fixedDeltaTime/attackSpeed)*4;
         if (t > 1) t = 1;
-        //rb.MovePosition((player.gameObject.transform.position + new Vector3(mousePos.x,mousePos.y,0).normalized*10) * Time.fixedDeltaTime );
+        attackOffset = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
+
 
         StartCoroutine(attackAnim());
     }
