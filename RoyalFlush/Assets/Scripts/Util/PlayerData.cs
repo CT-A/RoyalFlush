@@ -14,6 +14,7 @@ public class PlayerData
     public float minCardsLeft;
     public int cardsDropped;
     public List<string> cardsLeft;
+    public int[] seed;
 
     public PlayerData(PlayerControlls player) {
         //IF YOU UPDATE THIS, UPDATE THE LOAD FROM SAVE FUNCTION IN PLAYER
@@ -24,6 +25,7 @@ public class PlayerData
         maxHealth = player.maxHP;
         health = player.hp;
         gold = player.gold;
+        seed = player.seed;
 
         position = new float[3];
         position[0] = player.transform.position.x;

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class AStarGrid : MonoBehaviour {
-	//Grid parameters:
-	//collidableMap is the TileMap containing collidable tiles
-	//gridWorldSize is the size of the grid in world units centered in the middle of the grid
-	//resolution is the size of each A* node in world units
-	//allowDiagonals determines whether diagonal nodes are returned as neighbor
-	public Tilemap collidableMap;
+    //Grid parameters:
+    //collidableMap is the TileMap containing collidable tiles
+    //gridWorldSize is the size of the grid in world units centered in the middle of the grid
+    //resolution is the size of each A* node in world units
+    //allowDiagonals determines whether diagonal nodes are returned as neighbor
+    public List<Tilemap> collidableMaps;
+	//public Tilemap collidableMap;
 	public Vector2 gridWorldSize;
 	public float resolution;
 	public bool allowDiagonals;
@@ -32,9 +33,15 @@ public class AStarGrid : MonoBehaviour {
 
 		offset = resolution / 2;
 
-		//start building the grid
+        //start building the grid
+        collidableMaps = new List<Tilemap>();
 		BuildGrid();
 	}
+
+    public void clearGrids()
+    {
+        collidableMaps = new List<Tilemap>();
+    }
 
 	void BuildGrid() {
 		//create the map array
@@ -48,10 +55,11 @@ public class AStarGrid : MonoBehaviour {
 				Vector3 checkPos = startPos + new Vector3(x * resolution + offset, y * resolution + offset, 0);
 				bool isSolid = false;
 
-				//if there is a collidable tile there, then mark the node as solid
-				if (collidableMap.HasTile(collidableMap.WorldToCell(checkPos))) {
-					isSolid = true;
-				}
+				//if there is a collidable tile there (in any map), then mark the node as solid
+                foreach(Tilemap map in collidableMaps)
+				    if (map.HasTile(map.WorldToCell(checkPos))) {
+					    isSolid = true;
+				    }
 
 				//update the node map
 				nodes[x, y] = new Node(isSolid, x, y);

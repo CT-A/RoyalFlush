@@ -21,9 +21,12 @@ public class PlayerControlls : MonoBehaviour
 
     public Inventory i;
 
+    public int[] seed;
+
     // Start is called before the first frame update
     void Start()
     {
+        seed = new int[9];
         maxHP = 10;
         hp = 10;
         gold = 0;
@@ -61,6 +64,7 @@ public class PlayerControlls : MonoBehaviour
 
     public void LoadFromSave(PlayerData data)
     {
+        seed = data.seed;
         gold = data.gold;
         hp = data.health;
         maxHP = data.maxHealth;

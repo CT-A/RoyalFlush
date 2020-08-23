@@ -817,6 +817,8 @@ MonoBehaviour:
   curCardChance: 0
   goldDropped: 0
   maxGold: 0
+  minGoldPerPile: 0
+  maxGoldPerPile: 0
   goldPile: {fileID: 7357854793781295162, guid: 2effb6c92d0db8840aacf295d2c77ad7,
     type: 3}
   gm: {fileID: 1411509637}
@@ -1140,6 +1142,7 @@ Transform:
   m_Children:
   - {fileID: 842995498}
   - {fileID: 783640695}
+  - {fileID: 1734134858}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1157,6 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dh: {fileID: 842995499}
   tah: {fileID: 783640694}
+  mh: {fileID: 1734134859}
   numEnemies: 8
 --- !u!1 &1493778326
 GameObject:
@@ -1348,6 +1352,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551051481}
   m_CullTransparentMesh: 0
+--- !u!1 &1734134857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734134858}
+  - component: {fileID: 1734134859}
+  m_Layer: 0
+  m_Name: MapHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1734134858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734134857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1411509636}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734134859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734134857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221f60c36ec94bc45948a0d6518a4dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topLeftMaps:
+  - {fileID: 2940370188502361937, guid: 0ca010f95014d8d4caa7b357e5a768d2, type: 3}
+  topCenterMaps:
+  - {fileID: 4440570028758389765, guid: 0f62444c5232b7346be4d164ebee6ab9, type: 3}
+  topRightMaps:
+  - {fileID: 2717984572173127718, guid: 92c981f17bbf8f94e8c1504a866fb184, type: 3}
+  middleLeftMaps:
+  - {fileID: 3716408294350682927, guid: 7568728dec52f1f49b4be10cd5f62c09, type: 3}
+  middleCenterMaps:
+  - {fileID: 1611365069853128832, guid: 46f18f41c6f1cd24f9475b14d5d220ed, type: 3}
+  middleRightMaps:
+  - {fileID: 8049023013864948665, guid: fd6e429248e8195408f91f3adba55979, type: 3}
+  bottomLeftMaps:
+  - {fileID: 6609990620954898115, guid: 51bcee5ddc4c0aa4f91761c9083e777e, type: 3}
+  bottomCenterMaps:
+  - {fileID: 317737254610734380, guid: 8ee7e97afb78ad24f8d11d4c8e45fcd2, type: 3}
+  bottomRightMaps:
+  - {fileID: 536573605661715374, guid: 57b818a40e6938a40b6ab396e8ed81e9, type: 3}
+  topLeftSpawn: {x: -10, y: 10, z: 0}
+  topCenterSpawn: {x: 0, y: 10, z: 0}
+  topRightSpawn: {x: 10, y: 10, z: 0}
+  middleLeftSpawn: {x: -10, y: 0, z: 0}
+  middleCenterSpawn: {x: 0, y: 0, z: 0}
+  middleRightSpawn: {x: 10, y: 0, z: 0}
+  bottomLeftSpawn: {x: -10, y: -10, z: 0}
+  bottomCenterSpawn: {x: 0, y: -10, z: 0}
+  bottomRightSpawn: {x: 10, y: -10, z: 0}
+  tl: 0
+  tc: 0
+  tr: 0
+  ml: 0
+  mc: 0
+  mr: 0
+  bl: 0
+  bc: 0
+  br: 0
+  parentMap: {fileID: 0}
 --- !u!1 &1859376192
 GameObject:
   m_ObjectHideFlags: 0

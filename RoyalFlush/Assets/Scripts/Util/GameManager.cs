@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private bool saveOnLoad;
     public DropHandler dh;
     public TempAnimationHandler tah;
+    public MapHandler mh;
 
     //remember to set this when spawning enemies
     public int numEnemies;
@@ -67,11 +68,19 @@ public class GameManager : MonoBehaviour
             //Debug.Log(SceneManager.GetActiveScene().buildIndex);
             //initialize player
             pc = GameObject.FindWithTag("Player").GetComponent<PlayerControlls>();
-            if (saveOnLoad) SaveSystem.SavePlayer(pc);
+            if (saveOnLoad)
+            {
+                mh.CreateNewMap();
+                pc.seed = new int[] { mh.tl, mh.tc, mh.tr, mh.ml, mh.mc, mh.mr, mh.bl, mh.bc, mh.br};
+                SaveSystem.SavePlayer(pc);
+            }
             else
             {
                 PlayerData data = SaveSystem.LoadPlayer();
                 pc.LoadFromSave(data);
+                mh.SetSeed(pc.seed[0], pc.seed[1], pc.seed[2], pc.seed[3], pc.seed[4], pc.seed[5], pc.seed[6], pc.seed[7], pc.seed[8]);
+                mh.CreateMap();
+                mh.SetAStarGrids();
             }
         }
     }
