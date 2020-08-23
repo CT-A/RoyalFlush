@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Sword : Weapon
+public class Bow : Weapon
 {
     public PlayerControlls player;
 
@@ -18,6 +18,7 @@ public class Sword : Weapon
     public float t;
     public float range;
     public Vector3 attackOffset;
+    public GameObject arrow;
 
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
@@ -27,11 +28,10 @@ public class Sword : Weapon
         player = pc;
         followSpeed = player.moveSpeed;
         rotateSpeed = 5f;
-        swingSpeed = 20f;
         player.weapon = this;
         isAttacking = false;
-        range = 2;
         baseOffset = .5f;
+        swingSpeed = 20f;
         offsetDistance = baseOffset;
         dpt = 1;
         tickRate = 10;
@@ -46,7 +46,7 @@ public class Sword : Weapon
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void FixedUpdate()
@@ -59,25 +59,30 @@ public class Sword : Weapon
         if (player.mousePos.y < 0) angle = angle * -1;
         angle += 180;
 
-        if (!isAttacking)  rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
+        rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
 
         if (!isAttacking && t > 0) t -= (Time.fixedDeltaTime / attackSpeed) * 8;
         if (t < 0) t = 0;
         offsetDistance = Mathf.Lerp(baseOffset, range, t);
         Vector3 offsetVec = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
 
-        if (isAttacking) rb.MovePosition((player.gameObject.transform.position + attackOffset) * Time.fixedDeltaTime * followSpeed * 10);
-        else rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
+        rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
     }
 
     public override void Attack(Vector2 mousePos)
     {
-        isAttacking = true;
-        t += (Time.fixedDeltaTime/attackSpeed)*4;
+        
+        t += (Time.fixedDeltaTime / attackSpeed) * 4;
         if (t > 1) t = 1;
-        attackOffset = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
 
-
+        if (!isAttacking)
+        {
+            GameObject arro = Instantiate(arrow, rb.position, gameObject.transform.rotation);
+            //arro.GetComponent<Rigidbody2D>().velocity = new Vector2(player.mousePos.x, player.mousePos.y).normalized * 10;
+            arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
+            //arro.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10);
+        }
+        isAttacking = true;
         StartCoroutine(attackAnim());
     }
 

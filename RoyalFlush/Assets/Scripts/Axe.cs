@@ -10,8 +10,6 @@ public class Axe : Weapon
     private Rigidbody2D rb;
 
     public float offsetDistance;
-    public int damage;
-    public float attackSpeed;
     public float swingSpeed;
     public float followSpeed;
     public float rotateSpeed;
@@ -19,7 +17,9 @@ public class Axe : Weapon
     public float baseOffset;
     public float t;
     public float range;
-    public Quaternion attackOffset;
+    public bool swing;
+    public Quaternion swipeOffset;
+    public Vector3 attackOffset;
     public Vector3 attackStartRotation;
     public Vector3 attackEndRotation;
 
@@ -34,6 +34,7 @@ public class Axe : Weapon
         swingSpeed = 20f;
         player.weapon = this;
         isAttacking = false;
+        swing = false;
         range = 2;
         baseOffset = .5f;
         offsetDistance = baseOffset;
@@ -42,7 +43,9 @@ public class Axe : Weapon
         tickTimer = 0;
         attackSpeed = .5f;
         t = 0;
-        attackOffset = Quaternion.Euler(new Vector3(0, 0, 15));
+        swipeOffset = Quaternion.Euler(new Vector3(0, 0, 15));
+        GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
+        damage = damages[level];
     }
 
     // Update is called once per frame
@@ -61,14 +64,18 @@ public class Axe : Weapon
         if (player.mousePos.y < 0) angle = angle * -1;
         angle += 180;
 
+        //if(!isAttacking) 
         rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
+        //else rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed/0.25f));
+        //if (swing) rb.MoveRotation(Mathf.LerpAngle(rb.rotation, , Time.fixedDeltaTime * swingSpeed));
 
         if (!isAttacking && t > 0) t -= (Time.fixedDeltaTime / attackSpeed) * 8;
         if (t < 0) t = 0;
         offsetDistance = Mathf.Lerp(baseOffset, range, t);
         Vector3 offsetVec = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
 
-        rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
+        if (isAttacking) rb.MovePosition(Vector3.Lerp(rb.position,(player.gameObject.transform.position + offsetVec*1.5f),Time.fixedDeltaTime *followSpeed*0.5f));
+        else rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
     }
 
     public override void Attack(Vector2 mousePos)
@@ -76,8 +83,7 @@ public class Axe : Weapon
         isAttacking = true;
         t += (Time.fixedDeltaTime / attackSpeed) * 4;
         if (t > 1) t = 1;
-        attackStartRotation = attackOffset * new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized;
-
+        attackOffset = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
 
         StartCoroutine(attackAnim());
     }

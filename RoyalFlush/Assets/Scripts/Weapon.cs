@@ -6,11 +6,19 @@ public class Weapon : MonoBehaviour
 {
     //damage per tick
     public float dpt;
+    public float attackSpeed;
+    public float range;
 
     //Number of fixed updates before causing dmg (there are 50 fixedUpdates per second, so a tickRate of 1 is 50 damage procs a second)
     public int tickRate;
 
     public int tickTimer;
+
+    public int level;
+    public Sprite[] sprites;
+    public int[] damages;
+    public float[] attackSpeeds;
+
 
     public virtual void InstantiateWeapon(PlayerControlls pc)
     {
@@ -20,6 +28,11 @@ public class Weapon : MonoBehaviour
     public virtual void Attack(Vector2 mousePos)
     {
 
+    }
+
+    public virtual void LevelUp()
+    {
+        level += 1;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

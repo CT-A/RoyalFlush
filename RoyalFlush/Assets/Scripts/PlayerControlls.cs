@@ -38,6 +38,10 @@ public class PlayerControlls : MonoBehaviour
         {
             weapon.Attack(mousePos);
         }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            weapon.LevelUp();
+        }
     }
 
     void FixedUpdate()
