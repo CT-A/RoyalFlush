@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
                 int j = 0;
                 while (j < cards.Length)
                 {
-                    if ((hand[j] == null) || (hand[j] == ""))
+                    if ((cards[j] == null) || (cards[j] == ""))
                     {
                         cards[j] = item;
                         cIdx = j;

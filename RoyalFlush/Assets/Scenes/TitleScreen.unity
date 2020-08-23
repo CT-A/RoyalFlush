@@ -753,7 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxItems: 0
   itemChance: 0
-  cardChance: 0.1
+  cardChance: 0.5
   possibleDrops:
   - {fileID: 9125095769573920769, guid: 2baa37f6b53594041818d828befd3a70, type: 3}
   - {fileID: 444152280209486975, guid: a1a08e7aa6820c044b8f775c52312056, type: 3}
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   dh: {fileID: 842995499}
   tah: {fileID: 783640694}
   mh: {fileID: 1734134859}
-  numEnemies: 8
+  numEnemies: 0
 --- !u!1 &1493778326
 GameObject:
   m_ObjectHideFlags: 0

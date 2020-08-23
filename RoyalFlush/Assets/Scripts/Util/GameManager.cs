@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //change this when spawning is done
-        numEnemies = 8;
+        numEnemies = 0;
         DontDestroyOnLoad(this.gameObject);
     }
 

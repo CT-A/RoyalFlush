@@ -38,7 +38,7 @@ public class DropHandler : MonoBehaviour
         curCardChance = cardChance;
         cardsDropped = 0;
         maxCards = 15;
-        minCardsLeft = 5;
+        minCardsLeft = 8;
         possibleCardsDict = new Dictionary<string, GameObject>();
         foreach (GameObject card in possibleDrops)
         {

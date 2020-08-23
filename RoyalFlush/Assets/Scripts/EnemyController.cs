@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour
         moving = true;
         pf = GetComponent<AStarPathfinding>();
         player = GameObject.FindWithTag("Player");
-
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().numEnemies += 1;
         //remember to change this
         hp = 10;
     }
