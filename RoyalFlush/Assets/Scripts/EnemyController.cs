@@ -38,17 +38,29 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 
         //remember to change this
-        hp = 100;
+        hp = 10;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //if dead, die
+        if (hp < 0) die();
+
         //try to attack
         attack();
 
         //if you're moving, move
         if (moving) move();
+    }
+
+    void die()
+    {
+        GameManager gm = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+        gm.drop(gameObject.transform.position);
+        gm.numEnemies -= 1;
+        gm.tah.explosion(transform.position);
+        Destroy(gameObject);
     }
 
     void move()

@@ -15,9 +15,18 @@ public class PlayerControlls : MonoBehaviour
 
     public Vector2 mousePos;
 
+    public int gold;
+    public int hp;
+    public int maxHP;
+
+    public Inventory i;
+
     // Start is called before the first frame update
     void Start()
     {
+        maxHP = 10;
+        hp = 10;
+        gold = 0;
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 5f;
         if (weapon != null)
@@ -45,8 +54,21 @@ public class PlayerControlls : MonoBehaviour
         rb.MovePosition(rb.position + moveSpeed * movement * Time.fixedDeltaTime);
     }
 
+    public void Pickup(string item)
+    {
+        i.Pickup(item);
+    }
+
     public void LoadFromSave(PlayerData data)
     {
+        gold = data.gold;
+        hp = data.health;
+        maxHP = data.maxHealth;
         gameObject.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.dropsLeft = data.dropsLeft;
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.cardsLeft = data.cardsLeft;
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.minCardsLeft = data.minCardsLeft;
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.cardsDropped = data.cardsDropped;
+
     }
 }

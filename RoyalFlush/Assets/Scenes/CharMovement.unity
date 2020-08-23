@@ -240,6 +240,9 @@ MonoBehaviour:
   isMelee: 0
   weapon: {fileID: -7182027204962441136, guid: ef0160d95b14e6e4aa9e04151340adc4, type: 3}
   mousePos: {x: 0, y: 0}
+  gold: 0
+  hp: 0
+  maxHP: 0
 --- !u!50 &1303725849
 Rigidbody2D:
   serializedVersion: 4

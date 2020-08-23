@@ -7,10 +7,22 @@ public class GameManager : MonoBehaviour
 {
     private PlayerControlls pc;
     private bool saveOnLoad;
+    public DropHandler dh;
+    public TempAnimationHandler tah;
+
+    //remember to set this when spawning enemies
+    public int numEnemies;
     // Start is called before the first frame update
     void Start()
     {
+        //change this when spawning is done
+        numEnemies = 8;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void drop(Vector3 pos)
+    {
+        dh.drop(pos);
     }
 
     public void DeleteSave()
@@ -52,7 +64,7 @@ public class GameManager : MonoBehaviour
         // Do anything after proper scene has been loaded
         if (SceneManager.GetActiveScene().buildIndex == sceneNumber)
         {
-            Debug.Log(SceneManager.GetActiveScene().buildIndex);
+            //Debug.Log(SceneManager.GetActiveScene().buildIndex);
             //initialize player
             pc = GameObject.FindWithTag("Player").GetComponent<PlayerControlls>();
             if (saveOnLoad) SaveSystem.SavePlayer(pc);

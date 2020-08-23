@@ -28,7 +28,7 @@ public static class SaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log(Application.persistentDataPath);
+            //Debug.Log(Application.persistentDataPath);
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
 
