@@ -45,7 +45,7 @@ public class Axe : Weapon
         t = 0;
         swipeOffset = Quaternion.Euler(new Vector3(0, 0, 15));
         GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
-        damage = damages[level];
+        dpt = damages[level];
     }
 
     // Update is called once per frame

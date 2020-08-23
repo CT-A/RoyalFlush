@@ -1653,7 +1653,7 @@ MonoBehaviour:
   moveSpeed: 5
   movement: {x: 0, y: 0}
   isMelee: 0
-  weapon: {fileID: -7182027204962441136, guid: ef0160d95b14e6e4aa9e04151340adc4, type: 3}
+  weapon: {fileID: 8987029487886556118, guid: 7b674200d73a18947a95346dbdc2d96a, type: 3}
   mousePos: {x: 0, y: 0}
   gold: 0
   hp: 0

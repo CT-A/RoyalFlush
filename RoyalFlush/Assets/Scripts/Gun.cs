@@ -15,7 +15,6 @@ public class Gun : Weapon
     public bool isAttacking;
     public float baseOffset;
     public float t;
-    public float range;
     public Vector3 attackOffset;
     public GameObject arrow;
     public SpriteRenderer gunSprite;
@@ -39,9 +38,10 @@ public class Gun : Weapon
         tickRate = 10;
         tickTimer = 0;
         t = 0;
+        level = 0;
         gunSprite = GetComponentInChildren<SpriteRenderer>();
         gunSprite.sprite = sprites[level];
-        damage = damages[level];
+        dpt = damages[level];
         attackSpeed = attackSpeeds[level];
         attackCooldown = attackSpeed;
     }
@@ -54,12 +54,12 @@ public class Gun : Weapon
 
     void FixedUpdate()
     {
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (player == null) player = GameObject.FindWithTag("Player").GetComponent<PlayerControlls>();
         if (player.mousePos.x < 0) gunSprite.flipY = false;
         else gunSprite.flipY = true;
         tickTimer = (tickTimer - 1);
         if (tickTimer < 0) tickTimer = tickRate;
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-        if (player == null) player = GameObject.FindWithTag("Player").GetComponent<PlayerControlls>();
         float angle = Vector2.Angle(Vector2.right, player.mousePos);
         if (player.mousePos.y < 0) angle = angle * -1;
         angle += 180;
@@ -80,12 +80,13 @@ public class Gun : Weapon
         t += (Time.fixedDeltaTime / attackSpeed) * 4;
         if (t > 1) t = 1;
 
-        if (!isAttacking && )
+        if (!isAttacking && attackCooldown <= 0)
         {
             GameObject arro = Instantiate(arrow, rb.position, gameObject.transform.rotation);
             //arro.GetComponent<Rigidbody2D>().velocity = new Vector2(player.mousePos.x, player.mousePos.y).normalized * 10;
             arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
             //arro.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10);
+            attackCooldown = attackSpeed;
         }
         isAttacking = true;
         StartCoroutine(attackAnim());
@@ -103,7 +104,7 @@ public class Gun : Weapon
     {
         base.LevelUp();
         gunSprite.sprite = sprites[level];
-        damage = damages[level];
+        dpt = damages[level];
         attackSpeed = attackSpeeds[level];
     }
 }

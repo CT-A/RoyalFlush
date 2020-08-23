@@ -40,7 +40,7 @@ public class Sword : Weapon
         t = 0;
         level = 1;
         GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
-        damage = damages[level];
+        dpt = damages[level];
     }
 
     // Update is called once per frame
