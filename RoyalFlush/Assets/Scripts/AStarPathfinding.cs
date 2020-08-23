@@ -6,8 +6,13 @@ public class AStarPathfinding : MonoBehaviour {
 	//the A* grid to pathfind on
 	public AStarGrid grid;
 
-	//for debugging, draws the last path calculated
-	public bool drawPath;
+    void Start()
+    {
+        grid = GameObject.FindWithTag("PathFinder").GetComponent<AStarGrid>();
+    }
+
+    //for debugging, draws the last path calculated
+    public bool drawPath;
 
 	//for use with drawPath
 	private List<Node> draw = new List<Node>();

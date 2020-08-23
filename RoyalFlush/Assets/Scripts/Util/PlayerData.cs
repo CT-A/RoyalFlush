@@ -7,12 +7,25 @@ public class PlayerData
 {
     public int level;
     public int health;
+    public int maxHealth;
+    public int gold;
     public float[] position;
+    public List<string> dropsLeft;
+    public float minCardsLeft;
+    public int cardsDropped;
+    public List<string> cardsLeft;
+    public int[] seed;
 
     public PlayerData(PlayerControlls player) {
         //IF YOU UPDATE THIS, UPDATE THE LOAD FROM SAVE FUNCTION IN PLAYER
-        //level = player.level
-        //health = player.health
+        dropsLeft = GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.dropsLeft;
+        cardsLeft = GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.cardsLeft;
+        minCardsLeft = GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.minCardsLeft;
+        cardsDropped = GameObject.FindWithTag("GameController").GetComponent<GameManager>().dh.cardsDropped;
+        maxHealth = player.maxHP;
+        health = player.hp;
+        gold = player.gold;
+        seed = player.seed;
 
         position = new float[3];
         position[0] = player.transform.position.x;

@@ -47,7 +47,7 @@ public class Weapon : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("triggerStay");
+        //Debug.Log("triggerStay");
         if (other.tag == "Enemy")
         {
             EnemyController es = other.gameObject.GetComponent<EnemyController>();
