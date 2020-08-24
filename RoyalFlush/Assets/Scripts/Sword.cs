@@ -18,6 +18,8 @@ public class Sword : Weapon
     public float t;
     public Vector3 attackOffset;
 
+    public float attackCooldown;
+
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
     {
@@ -29,7 +31,7 @@ public class Sword : Weapon
         swingSpeed = 20f;
         player.weapon = this;
         isAttacking = false;
-        range = 2;
+        range = 0;
         baseOffset = .5f;
         offsetDistance = baseOffset;
         dpt = 1;
@@ -37,15 +39,19 @@ public class Sword : Weapon
         tickTimer = 0;
         attackSpeed = .5f;
         t = 0;
-        level = 1;
+        level = 0;
         GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
         dpt = damages[level];
+        attackSpeed = attackSpeeds[level];
+        attackCooldown = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
+        if (attackCooldown <= 0 && isAttacking) isAttacking = false;
+
     }
 
     void FixedUpdate()
@@ -71,20 +77,20 @@ public class Sword : Weapon
 
     public override void Attack(Vector2 mousePos)
     {
-        isAttacking = true;
-        t += (Time.fixedDeltaTime/attackSpeed)*4;
-        if (t > 1) t = 1;
-        attackOffset = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
-
-
-        StartCoroutine(attackAnim());
+        if (attackCooldown <= 0 && isAttacking == false)
+        {
+            isAttacking = true;
+            t += (Time.fixedDeltaTime / attackSpeed) * 4;
+            if (t > 1) t = 1;
+            attackOffset = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * (offsetDistance + range);
+        }
     }
 
-
-
-    IEnumerator attackAnim()
+    public override void LevelUp()
     {
-        yield return new WaitForSeconds(attackSpeed);
-        isAttacking = false;
+        base.LevelUp();
+        GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
+        dpt = damages[level];
+        attackSpeed = attackSpeeds[level];
     }
 }

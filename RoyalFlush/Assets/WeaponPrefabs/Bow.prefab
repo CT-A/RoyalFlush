@@ -66,22 +66,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78ae782a1f3e804ab7650b5f605a9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dpt: 1
+  dpt: 2
+  attackSpeed: 1
+  range: 0
   tickRate: 10
   tickTimer: 0
+  level: 0
+  sprites:
+  - {fileID: -2956485710125220326, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: -5327574120710591286, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: 4164584355842939140, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: 1540720963889068762, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: 4239556579006301208, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  damages: 020000000400000006000000080000000a000000
+  attackSpeeds:
+  - 1
+  - 0.7
+  - 0.5
+  - 0.3
+  - 0.1
   player: {fileID: 0}
   offsetDistance: 0.5
-  damage: 0
-  attackSpeed: 0.5
   swingSpeed: 20
   followSpeed: 5
   rotateSpeed: 5
   isAttacking: 0
   baseOffset: 0.5
   t: 0
-  range: 0
   attackOffset: {x: 0, y: 0, z: 0}
   arrow: {fileID: 4789722194240275354, guid: 57a37fb097af525489dbd9822b2d2652, type: 3}
+  attackCooldown: 1
 --- !u!1 &5285832881125551918
 GameObject:
   m_ObjectHideFlags: 0

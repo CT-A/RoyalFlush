@@ -31,7 +31,7 @@ public class Gun : Weapon
         rotateSpeed = 5f;
         player.weapon = this;
         isAttacking = false;
-        baseOffset = .5f;
+        baseOffset = .2f;
         swingSpeed = 20f;
         offsetDistance = baseOffset;
         dpt = 1;
@@ -39,6 +39,7 @@ public class Gun : Weapon
         tickTimer = 0;
         t = 0;
         level = 0;
+        range = 0.2f;
         gunSprite = GetComponentInChildren<SpriteRenderer>();
         gunSprite.sprite = sprites[level];
         dpt = damages[level];
@@ -50,6 +51,7 @@ public class Gun : Weapon
     void Update()
     {
         if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
+        if (attackCooldown <= 0 && isAttacking) isAttacking = false;
     }
 
     void FixedUpdate()
@@ -86,18 +88,10 @@ public class Gun : Weapon
             //arro.GetComponent<Rigidbody2D>().velocity = new Vector2(player.mousePos.x, player.mousePos.y).normalized * 10;
             arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
             //arro.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10);
+            arro.GetComponent<Projectile>().initialize(dpt, false,range);
             attackCooldown = attackSpeed;
+            isAttacking = true;
         }
-        isAttacking = true;
-        StartCoroutine(attackAnim());
-    }
-
-
-
-    IEnumerator attackAnim()
-    {
-        yield return new WaitForSeconds(attackSpeed);
-        isAttacking = false;
     }
 
     public override void LevelUp()

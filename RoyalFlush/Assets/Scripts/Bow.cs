@@ -19,6 +19,8 @@ public class Bow : Weapon
     public Vector3 attackOffset;
     public GameObject arrow;
 
+    public float attackCooldown;
+
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
     {
@@ -37,15 +39,19 @@ public class Bow : Weapon
         tickTimer = 0;
         attackSpeed = .5f;
         t = 0;
-        level = 1;
+        level = 0;
+        range = 0.5f;
         GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
         dpt = damages[level];
+        attackSpeed = attackSpeeds[level];
+        attackCooldown = attackSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
+        if (attackCooldown <= 0 && isAttacking) isAttacking = false;
     }
 
     void FixedUpdate()
@@ -74,22 +80,22 @@ public class Bow : Weapon
         t += (Time.fixedDeltaTime / attackSpeed) * 4;
         if (t > 1) t = 1;
 
-        if (!isAttacking)
+        if (!isAttacking && attackCooldown <= 0)
         {
             GameObject arro = Instantiate(arrow, rb.position, gameObject.transform.rotation);
-            //arro.GetComponent<Rigidbody2D>().velocity = new Vector2(player.mousePos.x, player.mousePos.y).normalized * 10;
             arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
-            //arro.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10);
+            arro.GetComponent<Projectile>().initialize(dpt,false,range);
+            attackCooldown = attackSpeed;
+            isAttacking = true;
         }
-        isAttacking = true;
-        StartCoroutine(attackAnim());
     }
 
 
-
-    IEnumerator attackAnim()
+    public override void LevelUp()
     {
-        yield return new WaitForSeconds(attackSpeed);
-        isAttacking = false;
+        base.LevelUp();
+        GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
+        dpt = damages[level];
+        attackSpeed = attackSpeeds[level];
     }
 }

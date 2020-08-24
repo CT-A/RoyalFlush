@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 4037799312445596838, guid: 685193f730def9048acd3182e019cc02,
+  m_Sprite: {fileID: -3966153680561713364, guid: 685193f730def9048acd3182e019cc02,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dpt: 1
-  attackSpeed: 0.5
+  attackSpeed: 0.6
   range: 2
   tickRate: 10
   tickTimer: 0
@@ -137,12 +137,12 @@ MonoBehaviour:
   sprites:
   - {fileID: -3966153680561713364, guid: 685193f730def9048acd3182e019cc02, type: 3}
   - {fileID: 4037799312445596838, guid: 685193f730def9048acd3182e019cc02, type: 3}
-  - {fileID: 4109514674942076826, guid: 685193f730def9048acd3182e019cc02, type: 3}
-  - {fileID: 3679617554097221540, guid: 685193f730def9048acd3182e019cc02, type: 3}
-  - {fileID: 8032396235813494402, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: -8341224634527637619, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: -905912774598856088, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  - {fileID: 4903443257983052015, guid: 685193f730def9048acd3182e019cc02, type: 3}
   damages: 0100000002000000030000000400000005000000
   attackSpeeds:
-  - 0.6
+  - 1
   - 0.5
   - 0.4
   - 0.3
@@ -155,8 +155,8 @@ MonoBehaviour:
   isAttacking: 0
   baseOffset: 0.5
   t: 0
-  range: 2
   attackOffset: {x: 0, y: 0, z: 0}
+  attackCooldown: 0
 --- !u!50 &5246374308324552637
 Rigidbody2D:
   serializedVersion: 4

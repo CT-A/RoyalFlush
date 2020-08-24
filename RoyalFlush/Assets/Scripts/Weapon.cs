@@ -32,6 +32,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void LevelUp()
     {
+        gameObject.transform.localScale = new Vector3(1 + level / 10f, 1 + level / 10f, 1 + level / 10f);
         level += 1;
     }
 
