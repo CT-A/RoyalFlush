@@ -16,7 +16,6 @@ public class Sword : Weapon
     public bool isAttacking;
     public float baseOffset;
     public float t;
-    public float range;
     public Vector3 attackOffset;
 
     // Start is called before the first frame update
