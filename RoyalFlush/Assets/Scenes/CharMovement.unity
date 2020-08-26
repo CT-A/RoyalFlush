@@ -238,11 +238,14 @@ MonoBehaviour:
   moveSpeed: 0
   movement: {x: 0, y: 0}
   isMelee: 0
-  weapon: {fileID: -7182027204962441136, guid: ef0160d95b14e6e4aa9e04151340adc4, type: 3}
+  weapon: {fileID: 8654357216251430, guid: 61dce73f27c6d694fb9084269e6327aa, type: 3}
   mousePos: {x: 0, y: 0}
   gold: 0
   hp: 0
   maxHP: 0
+  i: {fileID: 0}
+  seed: 
+  lvlUpTest: 0
 --- !u!50 &1303725849
 Rigidbody2D:
   serializedVersion: 4

@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     public int tickTimer;
 
     public int level;
+    public int size;
     public Sprite[] sprites;
     public int[] damages;
     public float[] attackSpeeds;
@@ -22,7 +23,6 @@ public class Weapon : MonoBehaviour
 
     public virtual void InstantiateWeapon(PlayerControlls pc)
     {
-
     }
 
     public virtual void Attack(Vector2 mousePos)
@@ -32,8 +32,19 @@ public class Weapon : MonoBehaviour
 
     public virtual void LevelUp()
     {
-        gameObject.transform.localScale = new Vector3(1 + level / 10f, 1 + level / 10f, 1 + level / 10f);
-        level += 1;
+        if (level < 4)
+        {
+            size = level;
+            range += .5f;
+        }
+        gameObject.transform.localScale = new Vector3(1 + size / 10f, 1 + size / 10f, 1 + size / 10f);
+        level += 1 ;
+        if (level >= 4)
+        {
+            level = 4;
+            dpt += 1;
+            size += 1;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

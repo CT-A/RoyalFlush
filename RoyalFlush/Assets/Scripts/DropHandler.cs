@@ -31,8 +31,8 @@ public class DropHandler : MonoBehaviour
 
     void Start()
     {
-        minGoldPerPile = 10;
-        maxGoldPerPile = 100;
+        minGoldPerPile = 1;
+        maxGoldPerPile = 20;
         goldDropped = 0;
         maxGold = 500;
         curCardChance = cardChance;
@@ -49,9 +49,11 @@ public class DropHandler : MonoBehaviour
         possibleItemsDict = new Dictionary<string, GameObject>();
         foreach (GameObject item in possibleItemDrops)
         {
-            string n = item.GetComponent<Item>().name;
+            //Debug.Log("adding item to dict and drops");
+            string n = item.GetComponent<StatItem>().name;
             possibleItemsDict.Add(n, item);
             dropsLeft.Add(n);
+            //Debug.Log(dropsLeft.Count + " left");
         }
     }
     public void drop(Vector3 position)

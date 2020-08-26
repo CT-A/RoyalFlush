@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Collidable
   - ParentMap
+  - ShopItem
   layers:
   - Default
   - TransparentFX

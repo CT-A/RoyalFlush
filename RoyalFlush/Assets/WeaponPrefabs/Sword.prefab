@@ -142,11 +142,11 @@ MonoBehaviour:
   - {fileID: 4903443257983052015, guid: 685193f730def9048acd3182e019cc02, type: 3}
   damages: 0100000002000000030000000400000005000000
   attackSpeeds:
-  - 1
   - 0.5
   - 0.4
   - 0.3
   - 0.2
+  - 0.1
   player: {fileID: 0}
   offsetDistance: 0.5
   swingSpeed: 20

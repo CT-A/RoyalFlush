@@ -807,7 +807,8 @@ MonoBehaviour:
   - {fileID: 753172047597792108, guid: f39a17e9e0b3d1b40b5aa5d07a16abd0, type: 3}
   - {fileID: 2627215607660622394, guid: d187586f5d83e254d80c016a8a0b8009, type: 3}
   - {fileID: 5205221945031615306, guid: 71981697bbd526c48b3b8acf680b3df0, type: 3}
-  possibleItemDrops: []
+  possibleItemDrops:
+  - {fileID: 8552835365992059475, guid: fd00b1817776f6e4e9b7b375f09842c3, type: 3}
   dropsLeft: []
   cardsLeft: []
   goldChance: 0.5
@@ -982,6 +983,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219214654}
   m_CullTransparentMesh: 0
+--- !u!1 &1265090418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265090419}
+  - component: {fileID: 1265090420}
+  m_Layer: 0
+  m_Name: ScoreAndShopHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265090419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265090418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1411509636}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265090420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265090418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a895655d97011bf4ba8aa3e755d1d499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toStock: []
+  dh: {fileID: 0}
 --- !u!1 &1344370737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1189,7 @@ Transform:
   - {fileID: 842995498}
   - {fileID: 783640695}
   - {fileID: 1734134858}
+  - {fileID: 1265090419}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1161,6 +1208,8 @@ MonoBehaviour:
   dh: {fileID: 842995499}
   tah: {fileID: 783640694}
   mh: {fileID: 1734134859}
+  sash: {fileID: 1265090420}
+  score: 0
   numEnemies: 0
 --- !u!1 &1493778326
 GameObject:

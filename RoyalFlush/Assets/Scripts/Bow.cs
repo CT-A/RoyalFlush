@@ -24,27 +24,30 @@ public class Bow : Weapon
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
     {
-        Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity);
-        rb = GetComponent<Rigidbody2D>();
-        player = pc;
-        followSpeed = player.moveSpeed;
-        rotateSpeed = 5f;
-        player.weapon = this;
-        isAttacking = false;
-        baseOffset = .5f;
-        swingSpeed = 20f;
-        offsetDistance = baseOffset;
-        dpt = 1;
-        tickRate = 10;
-        tickTimer = 0;
-        attackSpeed = .5f;
-        t = 0;
-        level = 0;
-        range = 0.5f;
-        GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
-        dpt = damages[level];
-        attackSpeed = attackSpeeds[level];
-        attackCooldown = attackSpeed;
+        Bow wep = Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<Bow>();
+        wep.rb = wep.gameObject.GetComponent<Rigidbody2D>();
+        wep.player = pc;
+        wep.followSpeed = wep.player.moveSpeed;
+        wep.rotateSpeed = 5f;
+        wep.player.weapon = this;
+        wep.isAttacking = false;
+        wep.baseOffset = .5f;
+        wep.swingSpeed = 20f;
+        wep.offsetDistance = wep.baseOffset;
+        wep.dpt = 1;
+        wep.tickRate = 10;
+        wep.tickTimer = 0;
+        wep.attackSpeed = .5f;
+        wep.t = 0;
+        wep.level = 0;
+        wep.range = 0.5f;
+        wep.sprites[level] = sprites[level];
+        wep.damages[level] = damages[level];
+        wep.attackSpeeds[level] = attackSpeeds[level];
+        wep.GetComponentInChildren<SpriteRenderer>().sprite = wep.sprites[level];
+        wep.dpt = wep.damages[level];
+        wep.attackSpeed = wep.attackSpeeds[level];
+        wep.attackCooldown = wep.attackSpeed;
     }
 
     // Update is called once per frame
@@ -66,9 +69,9 @@ public class Bow : Weapon
 
         rb.MoveRotation(Mathf.LerpAngle(rb.rotation, angle, Time.fixedDeltaTime * swingSpeed));
 
-        if (!isAttacking && t > 0) t -= (Time.fixedDeltaTime / attackSpeed) * 8;
-        if (t < 0) t = 0;
-        offsetDistance = Mathf.Lerp(baseOffset, range, t);
+        //if (!isAttacking && t > 0) t -= (Time.fixedDeltaTime / attackSpeed) * 8;
+        //if (t < 0) t = 0;
+        offsetDistance = 1;//Mathf.Lerp(baseOffset, range, t);
         Vector3 offsetVec = new Vector3(player.mousePos.x, player.mousePos.y, 0).normalized * offsetDistance;
 
         rb.MovePosition((player.gameObject.transform.position + offsetVec) * Time.fixedDeltaTime * followSpeed * 10);
@@ -77,12 +80,13 @@ public class Bow : Weapon
     public override void Attack(Vector2 mousePos)
     {
         
-        t += (Time.fixedDeltaTime / attackSpeed) * 4;
-        if (t > 1) t = 1;
+        //t += (Time.fixedDeltaTime / attackSpeed) * 4;
+        //if (t > 1) t = 1;
 
         if (!isAttacking && attackCooldown <= 0)
         {
             GameObject arro = Instantiate(arrow, rb.position, gameObject.transform.rotation);
+            arro.transform.localScale = gameObject.transform.localScale;
             arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
             arro.GetComponent<Projectile>().initialize(dpt,false,range);
             attackCooldown = attackSpeed;

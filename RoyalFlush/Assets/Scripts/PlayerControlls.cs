@@ -16,12 +16,13 @@ public class PlayerControlls : MonoBehaviour
     public Vector2 mousePos;
 
     public int gold;
-    public int hp;
-    public int maxHP;
+    public float hp;
+    public float maxHP;
 
     public Inventory i;
 
     public int[] seed;
+    public bool lvlUpTest;
 
     // Start is called before the first frame update
     void Start()
@@ -52,13 +53,35 @@ public class PlayerControlls : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            weapon.LevelUp();
+            if (lvlUpTest)
+            {
+                weapon.LevelUp();
+                lvlUpTest = false;
+            }
+            
         }
+        else lvlUpTest = true;
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveSpeed * movement * Time.fixedDeltaTime);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "enemy")
+        {
+            hp -= col.gameObject.GetComponent<EnemyController>().damage;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Finish")
+        {
+            GameObject.FindWithTag("GameController").GetComponent<GameManager>().EndLevel();
+        }
     }
 
     public void Pickup(string item)

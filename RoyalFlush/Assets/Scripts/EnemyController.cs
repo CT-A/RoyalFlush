@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 targetPos;
     private bool attacking;
     public float hp;
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class EnemyController : MonoBehaviour
         attackRange = 3f;
         atkTime = .8f;
         speed = 2.5f;
-        lungeSpeed = 10;
+        lungeSpeed = 20;
         lungeTimer = 0;
         lungeTime = .6f;
         attacking = false;

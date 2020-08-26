@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerData
 {
     public int level;
-    public int health;
-    public int maxHealth;
+    public float health;
+    public float maxHealth;
     public int gold;
     public float[] position;
     public List<string> dropsLeft;

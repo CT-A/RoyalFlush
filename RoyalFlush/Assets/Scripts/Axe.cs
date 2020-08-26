@@ -27,29 +27,32 @@ public class Axe : Weapon
     // Start is called before the first frame update
     public override void InstantiateWeapon(PlayerControlls pc)
     {
-        Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity);
-        rb = GetComponent<Rigidbody2D>();
-        player = pc;
-        followSpeed = player.moveSpeed;
-        rotateSpeed = 5f;
-        swingSpeed = 20f;
-        player.weapon = this;
-        isAttacking = false;
-        swing = false;
-        range = 0;
-        baseOffset = .5f;
-        offsetDistance = baseOffset;
-        dpt = 1;
-        tickRate = 10;
-        tickTimer = 0;
-        attackSpeed = .5f;
-        t = 0;
-        level = 0;
-        swipeOffset = Quaternion.Euler(new Vector3(0, 0, 15));
-        GetComponentInChildren<SpriteRenderer>().sprite = sprites[level];
-        dpt = damages[level];
-        attackSpeed = attackSpeeds[level];
-        attackCooldown = 0;
+        Axe wep = Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<Axe>();
+        wep.rb = wep.gameObject.GetComponent<Rigidbody2D>();
+        wep.player = pc;
+        wep.followSpeed = wep.player.moveSpeed;
+        wep.rotateSpeed = 5f;
+        wep.swingSpeed = 20f;
+        wep.player.weapon = this;
+        wep.isAttacking = false;
+        wep.swing = false;
+        wep.range = 0;
+        wep.baseOffset = .5f;
+        wep.offsetDistance = wep.baseOffset;
+        wep.dpt = 1;
+        wep.tickRate = 10;
+        wep.tickTimer = 0;
+        wep.attackSpeed = .5f;
+        wep.t = 0;
+        wep.level = 0;
+        wep.swipeOffset = Quaternion.Euler(new Vector3(0, 0, 15));
+        wep.sprites[level] = sprites[level];
+        wep.damages[level] = damages[level];
+        wep.attackSpeeds[level] = attackSpeeds[level];
+        wep.GetComponentInChildren<SpriteRenderer>().sprite = wep.sprites[level];
+        wep.dpt = wep.damages[level];
+        wep.attackSpeed = wep.attackSpeeds[level];
+        wep.attackCooldown = 0;
     }
 
     // Update is called once per frame
