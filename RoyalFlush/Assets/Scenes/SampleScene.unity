@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collidableMaps:
   - {fileID: 0}
-  gridWorldSize: {x: 50, y: 30}
+  gridWorldSize: {x: 40, y: 40}
   resolution: 1
   allowDiagonals: 1
   showGrid: 1
@@ -1660,6 +1660,7 @@ MonoBehaviour:
   maxHP: 0
   i: {fileID: 1105313335}
   seed: 
+  lvlUpTest: 0
 --- !u!50 &1105313331
 Rigidbody2D:
   serializedVersion: 4

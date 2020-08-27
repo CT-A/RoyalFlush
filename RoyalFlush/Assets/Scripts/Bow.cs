@@ -88,7 +88,7 @@ public class Bow : Weapon
             GameObject arro = Instantiate(arrow, rb.position, gameObject.transform.rotation);
             arro.transform.localScale = gameObject.transform.localScale;
             arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
-            arro.GetComponent<Projectile>().initialize(dpt,false,range);
+            arro.GetComponent<Projectile>().initialize(this,false,range);
             attackCooldown = attackSpeed;
             isAttacking = true;
         }

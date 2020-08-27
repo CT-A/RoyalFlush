@@ -5,12 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float dpt;
-
-    public int tickRate;
-
-    public int tickTimer;
-
+    public Weapon wep;
     public bool isBullet;
 
     public float range;
@@ -27,9 +22,9 @@ public class Projectile : MonoBehaviour
         
     }
 
-    public void initialize(float dmg, bool bullet, float r)
+    public void initialize(Weapon w, bool bullet, float r)
     {
-        dpt = dmg;
+        wep = w;
         isBullet = bullet;
         range = r;
         Destroy(gameObject, r);
@@ -42,9 +37,10 @@ public class Projectile : MonoBehaviour
         if (other.tag == "Enemy")
         {
             EnemyController es = other.gameObject.GetComponent<EnemyController>();
-            es.hp -= dpt;
+            es.hp -= wep.dpt;
             if (isBullet) Destroy(gameObject);
         }
+        else if (other.tag == "Collidable") Destroy(gameObject);
     }
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -52,7 +48,7 @@ public class Projectile : MonoBehaviour
         if (other.tag == "Enemy")
         {
             EnemyController es = other.gameObject.GetComponent<EnemyController>();
-            if (tickTimer == 0) es.hp -= dpt;
+            if (wep.tickTimer == 0) es.hp -= wep.dpt;
         }
     }
 

@@ -93,7 +93,7 @@ public class Gun : Weapon
             //arro.GetComponent<Rigidbody2D>().velocity = new Vector2(player.mousePos.x, player.mousePos.y).normalized * 10;
             arro.GetComponent<Rigidbody2D>().AddForce(new Vector2(player.mousePos.x, player.mousePos.y).normalized * 1000);
             //arro.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10);
-            arro.GetComponent<Projectile>().initialize(dpt, false,range);
+            arro.GetComponent<Projectile>().initialize(this, false,range);
             attackCooldown = attackSpeed;
             isAttacking = true;
         }
