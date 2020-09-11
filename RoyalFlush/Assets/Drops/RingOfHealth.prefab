@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7739962872437783893}
   - component: {fileID: 767704528621268094}
   - component: {fileID: -53929154799370448}
+  - component: {fileID: 7537230699820723213}
   m_Layer: 0
   m_Name: RingOfHealth
   m_TagString: Untagged
@@ -102,3 +103,19 @@ MonoBehaviour:
   dmg: 0
   range: 0
   aSpeed: 0
+--- !u!58 &7537230699820723213
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552835365992059475}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4

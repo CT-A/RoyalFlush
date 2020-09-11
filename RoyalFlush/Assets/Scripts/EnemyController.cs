@@ -20,15 +20,16 @@ public class EnemyController : MonoBehaviour
     private Vector3 targetPos;
     private bool attacking;
     public float hp;
+    public int maxHP;
     public float damage;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        attackRange = 3f;
+        attackRange = 1.5f;
         atkTime = .8f;
         speed = 2.5f;
-        lungeSpeed = 20;
+        lungeSpeed = 10;
         lungeTimer = 0;
         lungeTime = .6f;
         attacking = false;
@@ -39,7 +40,8 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         GameObject.FindWithTag("GameController").GetComponent<GameManager>().numEnemies += 1;
         //remember to change this
-        hp = 10;
+        maxHP = 10;
+        hp = maxHP;
     }
 
     // Update is called once per frame
@@ -60,7 +62,7 @@ public class EnemyController : MonoBehaviour
         GameManager gm = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         gm.drop(gameObject.transform.position);
         gm.numEnemies -= 1;
-        gm.tah.explosion(transform.position);
+        gm.death(transform.position,2);
         Destroy(gameObject);
     }
 

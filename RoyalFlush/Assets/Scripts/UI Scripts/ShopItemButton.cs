@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopItemButton : MonoBehaviour
 {
     public Image img;
     public string name;
-    public Text price;
-    public Text label;
+    public TMP_Text price;
+    public TMP_Text label;
     public DropHandler dh;
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,8 @@ public class ShopItemButton : MonoBehaviour
     public void Stock(string itemStocking)
     {
         name = itemStocking;
-        price.text = dh.possibleItemsDict[name].GetComponent<Item>().price.ToString();
-        label.text = name;
+        price.text = dh.possibleItemsDict[name].GetComponent<Item>().price.ToString()+"$";
+        label.text = name.ToUpper();
     }
     public void UpdateSprite()
     {
@@ -28,6 +29,7 @@ public class ShopItemButton : MonoBehaviour
     public void Buy()
     {
         GameManager gm = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-        if(gm.Buy(this)) gameObject.SetActive(false);
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().sash.Purchase(name);
+        if (gm.Buy(this)) gameObject.SetActive(false);
     }
 }

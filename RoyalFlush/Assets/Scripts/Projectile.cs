@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
             es.hp -= wep.dpt;
             if (isBullet) Destroy(gameObject);
         }
-        else if (other.tag == "Collidable") Destroy(gameObject);
+        //else if (other.tag == "Collidable") Destroy(gameObject);
     }
     private void OnTriggerStay2D(Collider2D other)
     {

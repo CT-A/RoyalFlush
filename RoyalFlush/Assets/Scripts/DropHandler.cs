@@ -73,11 +73,12 @@ public class DropHandler : MonoBehaviour
             cardsLeft.Remove(cardsLeft[randomIdx]);
         }
         //not dropping a card, check if dropping an item
-        else if (Random.value <= itemChance)
+        else if ((Random.value <= itemChance) && (dropsLeft.Count > 0))
         {
             int randomIdx = (int)Mathf.Floor(Random.Range(1f, dropsLeft.Count) - 1);
             GameObject itemToDrop = possibleItemsDict[dropsLeft[randomIdx]];
             Instantiate(itemToDrop, position, Quaternion.identity);
+            dropsLeft.Remove(dropsLeft[randomIdx]);
         }
         //didnt drop a card or item, check if dropping gold
         else if ((Random.value <= goldChance)&&(goldDropped < maxGold))

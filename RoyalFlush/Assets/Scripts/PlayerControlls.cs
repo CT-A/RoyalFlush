@@ -18,11 +18,15 @@ public class PlayerControlls : MonoBehaviour
     public int gold;
     public float hp;
     public float maxHP;
+    public int xp;
+    public int xpToNextLvl;
 
     public Inventory i;
 
     public int[] seed;
     public bool lvlUpTest;
+
+    public HudManager hm;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,7 @@ public class PlayerControlls : MonoBehaviour
         maxHP = 10;
         hp = 10;
         gold = 0;
+        xp = 0;
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 5f;
         if (weapon != null)
@@ -38,6 +43,9 @@ public class PlayerControlls : MonoBehaviour
             weapon.InstantiateWeapon(this);
             weapon = GameObject.FindWithTag("Weapon").GetComponent<Weapon>();
         }
+        xpToNextLvl = (weapon.level + 1) * 10;
+        hm = GameObject.FindWithTag("HUDManager").GetComponent<HudManager>();
+        hm.UpdateXP(xp, xpToNextLvl);
     }
 
     // Update is called once per frame
@@ -55,12 +63,29 @@ public class PlayerControlls : MonoBehaviour
         {
             if (lvlUpTest)
             {
+                /*
                 weapon.LevelUp();
+                hm.UpdateWeaponHUD();
+                hm.UpdateXP(xp, xpToNextLvl);
+                xp = 0;
+                xpToNextLvl = ((weapon.level + 1) * 20);
+                lvlUpTest = false;
+                */
+                GainXP();
                 lvlUpTest = false;
             }
             
         }
         else lvlUpTest = true;
+
+        if (xp >= xpToNextLvl)
+        {
+            weapon.LevelUp();
+            hm.UpdateWeaponHUD();
+            xp = 0;
+            xpToNextLvl = ((weapon.level + 1) * 20);
+            hm.UpdateXP(xp, xpToNextLvl);
+        }
     }
 
     void FixedUpdate()
@@ -87,6 +112,12 @@ public class PlayerControlls : MonoBehaviour
     public void Pickup(string item)
     {
         i.Pickup(item);
+    }
+
+    public void GainXP()
+    {
+        xp += 1;
+        hm.UpdateXP(xp, xpToNextLvl);
     }
 
     public void LoadFromSave(PlayerData data)

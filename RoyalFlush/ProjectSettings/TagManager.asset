@@ -10,6 +10,8 @@ TagManager:
   - Collidable
   - ParentMap
   - ShopItem
+  - HUDManager
+  - XP
   layers:
   - Default
   - TransparentFX

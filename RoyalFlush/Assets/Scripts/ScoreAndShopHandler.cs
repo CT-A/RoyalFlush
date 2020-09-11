@@ -21,12 +21,23 @@ public class ScoreAndShopHandler : MonoBehaviour
         }
         foreach(ShopItemButton item in toStock)
         {
-            int randomIdx = (int)Mathf.Floor(UnityEngine.Random.Range(0f, dh.dropsLeft.Count));
-            //Debug.Log(randomIdx);
-            //Debug.Log(dh.dropsLeft.Count);
-            string itemToStock = dh.dropsLeft[randomIdx];
+            string itemToStock = "Ring Of Health";
+            if (dh.dropsLeft.Count > 0)
+            {
+                int randomIdx = (int)Mathf.Floor(UnityEngine.Random.Range(0f, dh.dropsLeft.Count));
+                //Debug.Log(randomIdx);
+                //Debug.Log(dh.dropsLeft.Count);
+                itemToStock = dh.dropsLeft[randomIdx];
+            }
             item.Stock(itemToStock);
             item.UpdateSprite();
+        }
+    }
+    public void Purchase(string itemToBuy)
+    {
+        if (dh.dropsLeft.Count > 0)
+        {
+            dh.dropsLeft.Remove(itemToBuy);
         }
     }
     public int Score(string[] hand)

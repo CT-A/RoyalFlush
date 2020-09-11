@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TempAnimationHandler tah;
     public MapHandler mh;
     public ScoreAndShopHandler sash;
+    public XPHandler xph;
     public int score;
     public List<GameObject> queuedItems;
     public bool startingLevel;
@@ -28,6 +29,12 @@ public class GameManager : MonoBehaviour
     public void drop(Vector3 pos)
     {
         dh.drop(pos);
+    }
+
+    public void death(Vector3 pos, int n)
+    {
+        tah.explosion(pos);
+        xph.Spawn(pos, n);
     }
 
     public void DeleteSave()
@@ -63,6 +70,10 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public int GetGold()
+    {
+        return cachedGold;
     }
     public void QueueItem(GameObject item)
     {
