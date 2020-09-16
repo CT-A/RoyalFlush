@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxItems: 0
-  itemChance: 0.1
+  itemChance: 0.5
   cardChance: 0.5
   possibleDrops:
   - {fileID: 9125095769573920769, guid: 2baa37f6b53594041818d828befd3a70, type: 3}
@@ -866,6 +866,7 @@ MonoBehaviour:
   maxGoldPerPile: 0
   goldPile: {fileID: 7357854793781295162, guid: 2effb6c92d0db8840aacf295d2c77ad7,
     type: 3}
+  chest: {fileID: 3322884073559598467, guid: 70fe24ba899a974488724eb981641861, type: 3}
   gm: {fileID: 1411509637}
 --- !u!1 &1136186928
 GameObject:

@@ -27,6 +27,7 @@ public class DropHandler : MonoBehaviour
     public float minGoldPerPile;
     public float maxGoldPerPile;
     public GameObject goldPile;
+    public GameObject chest;
     public GameManager gm;
 
     void Start()
@@ -77,7 +78,8 @@ public class DropHandler : MonoBehaviour
         {
             int randomIdx = (int)Mathf.Floor(Random.Range(1f, dropsLeft.Count) - 1);
             GameObject itemToDrop = possibleItemsDict[dropsLeft[randomIdx]];
-            Instantiate(itemToDrop, position, Quaternion.identity);
+            GameObject fullChest = (GameObject)Instantiate(chest, position, Quaternion.identity);
+            fullChest.GetComponent<Chest>().item = itemToDrop;
             dropsLeft.Remove(dropsLeft[randomIdx]);
         }
         //didnt drop a card or item, check if dropping gold

@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     public void death(Vector3 pos, int n)
     {
+        drop(pos);
+        numEnemies -= 1;
         tah.explosion(pos);
         xph.Spawn(pos, n);
     }

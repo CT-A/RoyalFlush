@@ -60,8 +60,6 @@ public class EnemyController : MonoBehaviour
     void die()
     {
         GameManager gm = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-        gm.drop(gameObject.transform.position);
-        gm.numEnemies -= 1;
         gm.death(transform.position,2);
         Destroy(gameObject);
     }
