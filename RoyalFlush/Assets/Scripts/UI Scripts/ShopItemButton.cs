@@ -11,6 +11,7 @@ public class ShopItemButton : MonoBehaviour
     public TMP_Text price;
     public TMP_Text label;
     public DropHandler dh;
+    public GameObject so;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,10 @@ public class ShopItemButton : MonoBehaviour
     {
         GameManager gm = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         GameObject.FindWithTag("GameController").GetComponent<GameManager>().sash.Purchase(name);
-        if (gm.Buy(this)) gameObject.SetActive(false);
+        if (gm.Buy(this))
+        {
+            gameObject.SetActive(false);
+            so.SetActive(true);
+        }
     }
 }

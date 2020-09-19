@@ -54,7 +54,7 @@ public class Weapon : MonoBehaviour
         if (other.tag == "Enemy")
         {
             EnemyController es = other.gameObject.GetComponent<EnemyController>();
-            es.hp -= dpt;
+            es.Hurt(dpt);
         }
     }
     private void OnTriggerStay2D(Collider2D other)

@@ -134,6 +134,7 @@ MonoBehaviour:
   tickRate: 10
   tickTimer: 0
   level: 0
+  size: 0
   sprites:
   - {fileID: -5774010182472186640, guid: 685193f730def9048acd3182e019cc02, type: 3}
   - {fileID: 6820733545955376441, guid: 685193f730def9048acd3182e019cc02, type: 3}
@@ -155,7 +156,6 @@ MonoBehaviour:
   isAttacking: 0
   baseOffset: 0.5
   t: 0
-  range: 2
   swing: 0
   swipeOffset: {x: 0, y: 0, z: 0.1305262, w: 0.9914449}
   attackOffset: {x: -0.23332211, y: 0.44222257, z: 0}
@@ -193,7 +193,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

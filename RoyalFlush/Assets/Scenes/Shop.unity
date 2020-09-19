@@ -1383,6 +1383,7 @@ MonoBehaviour:
   price: {fileID: 461521319}
   label: {fileID: 266785070}
   dh: {fileID: 0}
+  so: {fileID: 592733549}
 --- !u!114 &1089886096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1436,17 +1437,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 592733549}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1089886097
 MonoBehaviour:
@@ -1855,6 +1845,7 @@ MonoBehaviour:
   price: {fileID: 1007917478}
   label: {fileID: 1226427338}
   dh: {fileID: 0}
+  so: {fileID: 1910475609}
 --- !u!114 &1723000028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,17 +1899,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1910475609}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1723000029
 MonoBehaviour:

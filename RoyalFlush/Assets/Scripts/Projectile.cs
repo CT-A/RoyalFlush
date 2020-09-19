@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
         if (other.tag == "Enemy")
         {
             EnemyController es = other.gameObject.GetComponent<EnemyController>();
-            es.hp -= wep.dpt;
+            es.Hurt(wep.dpt);
             if (isBullet) Destroy(gameObject);
         }
         //else if (other.tag == "Collidable") Destroy(gameObject);
