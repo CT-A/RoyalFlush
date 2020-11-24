@@ -116,6 +116,8 @@ MonoBehaviour:
   atkCD: 0
   lungeTimer: 0
   hp: 0
+  maxHP: 0
+  damage: 1
 --- !u!50 &1314208331520173007
 Rigidbody2D:
   serializedVersion: 4

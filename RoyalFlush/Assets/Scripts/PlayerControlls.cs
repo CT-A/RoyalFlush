@@ -95,9 +95,11 @@ public class PlayerControlls : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "enemy")
+        //Debug.Log("Collided With " + col.gameObject + " which has tag: " + col.gameObject.tag);
+        if (col.gameObject.tag == "Enemy")
         {
             hp -= col.gameObject.GetComponent<EnemyController>().damage;
+            hm.UpdateHpHud();
         }
     }
 
@@ -111,7 +113,9 @@ public class PlayerControlls : MonoBehaviour
 
     public void Pickup(string item)
     {
+        //Debug.Log("picked up " + item);
         i.Pickup(item);
+        hm.UpdateHpHud();
     }
 
     public void GainXP()

@@ -24,6 +24,7 @@ public class StatItem : Item
     {
         if (other.tag == "Player")
         {
+            Pickup(other.gameObject.GetComponent<PlayerControlls>());
             Destroy(gameObject);
         }
     }

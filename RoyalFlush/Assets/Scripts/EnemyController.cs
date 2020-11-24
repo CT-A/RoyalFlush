@@ -23,9 +23,11 @@ public class EnemyController : MonoBehaviour
     public int maxHP;
     public float damage;
     private int hurting;
+    private Color healthColor;
     // Start is called before the first frame update
     void Start()
     {
+        healthColor = Color.white;
         hurting = 0;
         rb = GetComponent<Rigidbody2D>();
         attackRange = 1.5f;
@@ -112,8 +114,8 @@ public class EnemyController : MonoBehaviour
             }
 
             //stop attack display if not hurting
-            if (hurting <= 0)
-                GetComponent<SpriteRenderer>().color = Color.white;
+            if (hurting <= 0 && !attacking)
+                GetComponent<SpriteRenderer>().color = healthColor;
             //start moving if far enough
             if ((pf.FindPath(transform.position, player.transform.position).Count > 0) && lungeTimer <= 0) moving = true;
         }
@@ -130,8 +132,8 @@ public class EnemyController : MonoBehaviour
 
     public void Oof()
     {
-        Color dmgColor = Color.Lerp(Color.red, Color.white, hp/maxHP);
-        GetComponent<SpriteRenderer>().color = dmgColor;
+        healthColor = Color.Lerp(Color.red, Color.white, hp/maxHP);
+        GetComponent<SpriteRenderer>().color = Color.red;
         hurting += 1;
         StartCoroutine(ResetColorAfterDelay(.3f));
     }
@@ -141,6 +143,6 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         hurting -= 1;
         if (hurting <= 0)
-            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().color = healthColor;
     }
 }

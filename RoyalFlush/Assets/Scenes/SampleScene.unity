@@ -149,6 +149,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 147081604}
   - {fileID: 253420567}
   m_Father: {fileID: 1798818276}
   m_RootOrder: 2
@@ -171,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wh: {fileID: 253420568}
+  hh: {fileID: 147081605}
 --- !u!1 &42509279
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +224,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &147081603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 147081604}
+  - component: {fileID: 147081605}
+  m_Layer: 0
+  m_Name: HealthHud
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &147081604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147081603}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -605, y: 388.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 28486079}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &147081605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147081603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbea92d4019d26446a3c0440ee8163c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heart: {fileID: 7091258829503866005, guid: 38ed391972b786245811d9fc884abab6, type: 3}
+  full: {fileID: -8595708014055669002, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  half: {fileID: 1458531584214546995, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  empty: {fileID: 4823867712944630053, guid: 685193f730def9048acd3182e019cc02, type: 3}
+  hearts: []
+  p: {fileID: 1105313330}
 --- !u!1 &253420566
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +306,7 @@ RectTransform:
   - {fileID: 679036902}
   - {fileID: 1083534762}
   m_Father: {fileID: 28486079}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1356,7 +1407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -560, y: 370}
+  m_AnchoredPosition: {x: -560, y: 368.6}
   m_SizeDelta: {x: 200, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &679036903
@@ -2199,8 +2250,8 @@ MonoBehaviour:
   weapon: {fileID: -7182027204962441136, guid: ef0160d95b14e6e4aa9e04151340adc4, type: 3}
   mousePos: {x: 0, y: 0}
   gold: 0
-  hp: 0
-  maxHP: 0
+  hp: 5
+  maxHP: 10
   xp: 0
   xpToNextLvl: 0
   i: {fileID: 1105313335}
